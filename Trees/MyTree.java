@@ -1,4 +1,5 @@
 package Trees;
+import java.util.*;
 
 /*
 Implements a binary search tree
@@ -56,6 +57,82 @@ public class MyTree
 			}
 		}
 
+	}
+
+
+	private List<Integer> getRootToNodePath(int n1) throws Exception {
+		List<Integer> path = new ArrayList<Integer>();
+		
+		if (root == null) {
+			throw new Exception();
+		}
+
+		// find n1
+		Node temp = root;
+
+		while (true) {
+			path.add(temp.data);
+			if (n1 == temp.data) {
+				break;
+			}
+
+			if (n1 < temp.data) {
+				temp = temp.left;
+			}
+			else {
+				temp = temp.right;
+			}
+
+			if (temp == null) {
+				throw new Exception();
+			}		
+		}
+
+		return path;
+			
+	}
+
+
+	/*
+	1. If root is null throw exception
+	2. Assign minimum of (n1,n2) to x and the other value to y
+	3. Using the property of BST, find the value starting from root that falls in the range [x,y]. This value is the least common ancestor.
+
+	*/
+
+	public int lowestCommonAncestor (int n1, int n2) throws Exception {
+		
+		if (root == null) {
+			throw new Exception();			
+		}
+
+		// find the min between n1 and n2
+		int x,y;
+		if (n1 <= n2) {
+			x = n1;
+			y = n2;
+		}
+		else {
+			x = n2;
+			y = n1;
+		}
+
+		Node temp = root;
+		int ancestor = root.data;
+
+		while (temp != null) {
+			if (temp.data >= x && temp.data <= y) {
+				ancestor = temp.data;
+				break;
+			}
+			else if (temp.data > y) {
+				temp = temp.left;
+			}
+			else {
+				temp = temp.right;
+			}
+		}
+		return ancestor;
 	}
 
 
