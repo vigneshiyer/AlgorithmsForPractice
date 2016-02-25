@@ -36,13 +36,12 @@ public class TreeEnumeration {
 		arr[2] = 2;
 
 		for (int i = 3; i < arr.length; i++) {
-			int val = 0, pos = 0;
+			int val = 0;
 			for (int j = i-1; j >= 0; j--) {
-				val += arr[j]*arr[pos];
+				val += arr[j]*arr[i-1-j];
 				if (val < 0) {
 					throw new Exception();
 				}
-				pos++;
 			}
 			arr[i] = val;			
 		}
